@@ -9,17 +9,17 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg:       #07090c;
-      --bg2:      #0c0f14;
-      --surface:  #10141a;
-      --border:   #1a2332;
-      --border2:  #243040;
-      --accent:   #00c8ff;
-      --accent2:  #7effa0;
-      --accent3:  #ffb347;
-      --text:     #8ba5be;
-      --muted:    #3d5166;
-      --white:    #e8f2fb;
+      --bg:       #f6f4ef;
+      --bg2:      #efede8;
+      --surface:  #fcfbf9;
+      --border:   #e3e0da;
+      --border2:  #d4d0c8;
+      --accent:   #006d9e;
+      --accent2:  #0a7a4b;
+      --accent3:  #b85c00;
+      --text:     #3b3b3e;
+      --muted:    #817f84;
+      --white:    #1c1c1e;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,8 +30,10 @@
       color: var(--text);
       font-family: 'JetBrains Mono', monospace;
       overflow-x: hidden;
-      cursor: none;
+      line-height: 1.7;
     }
+
+    ::selection { background: var(--accent); color: #fff; }
 
     /* ── CURSOR ── */
     .cursor {
@@ -39,33 +41,14 @@
       background: var(--accent); border-radius: 50%;
       position: fixed; top: 0; left: 0;
       pointer-events: none; z-index: 9999;
-      transition: transform 0.1s ease; mix-blend-mode: screen;
+      transition: transform 0.1s ease; mix-blend-mode: multiply;
     }
     .cursor-ring {
       width: 34px; height: 34px;
-      border: 1px solid rgba(0,200,255,0.35); border-radius: 50%;
+      border: 1px solid rgba(0,109,158,0.25); border-radius: 50%;
       position: fixed; top: 0; left: 0;
       pointer-events: none; z-index: 9998;
       transition: transform 0.2s ease;
-    }
-
-    /* ── BG ── */
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 10% 20%, rgba(0,200,255,0.05) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 40% at 90% 80%, rgba(126,255,160,0.04) 0%, transparent 60%);
-      pointer-events: none; z-index: 0;
-    }
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
-      background-image:
-        linear-gradient(rgba(0,200,255,0.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,200,255,0.018) 1px, transparent 1px);
-      background-size: 52px 52px;
-      pointer-events: none; z-index: 0;
     }
 
     /* ── NAV ── */
@@ -76,7 +59,7 @@
       transition: all 0.3s ease;
     }
     nav.scrolled {
-      background: rgba(7,9,12,0.88);
+      background: rgba(246,244,239,0.88);
       backdrop-filter: blur(24px);
       border-bottom: 1px solid var(--border);
       padding: 16px 56px;
@@ -130,12 +113,12 @@
     }
     .pill {
       display: inline-block;
-      background: rgba(0,200,255,0.07); border: 1px solid rgba(0,200,255,0.2);
+      background: rgba(0,109,158,0.07); border: 1px solid rgba(0,109,158,0.2);
       color: var(--accent); padding: 1px 9px; border-radius: 2px;
       font-size: 11px; letter-spacing: 0.05em;
     }
     .pill.green {
-      background: rgba(126,255,160,0.07); border-color: rgba(126,255,160,0.2);
+      background: rgba(10,122,75,0.07); border-color: rgba(10,122,75,0.2);
       color: var(--accent2);
     }
 
@@ -150,48 +133,41 @@
       border-radius: 3px; text-decoration: none; transition: all 0.22s ease; cursor: none;
     }
     .btn-primary {
-      background: var(--accent); color: var(--bg);
+      background: var(--accent); color: #fff;
       font-weight: 700; border: 1px solid var(--accent);
     }
     .btn-primary:hover {
       background: transparent; color: var(--accent);
-      box-shadow: 0 0 28px rgba(0,200,255,0.2);
+      box-shadow: 0 0 28px rgba(0,109,158,0.15);
     }
     .btn-ghost {
       background: transparent; color: var(--text); border: 1px solid var(--border2);
     }
     .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* Terminal */
-    .hero-terminal {
+    /* Photo panel */
+    .hero-photo {
       opacity: 0; animation: fadeIn 0.8s ease forwards 0.6s; padding-top: 80px;
+      display: flex; justify-content: center; align-items: center;
     }
-    .terminal {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 10px; overflow: hidden;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,200,255,0.05);
+    .photo-frame {
+      position: relative;
+      width: 340px; height: 340px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,109,158,0.08);
+      background: var(--surface);
     }
-    .terminal-bar {
-      background: var(--surface); padding: 11px 18px;
-      display: flex; align-items: center; gap: 8px;
-      border-bottom: 1px solid var(--border);
+    .photo-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
     }
-    .tdot { width: 11px; height: 11px; border-radius: 50%; }
-    .tdot.r { background: #ff5f57; } .tdot.y { background: #ffbd2e; } .tdot.g { background: #28c841; }
-    .t-title { font-size: 11px; color: var(--muted); margin-left: 10px; letter-spacing: 0.04em; }
-    .t-body { padding: 22px 22px 26px; font-size: 12.5px; line-height: 2; }
-    .t-row { display: flex; gap: 10px; align-items: baseline; }
-    .t-ps { color: var(--accent2); flex-shrink: 0; user-select: none; }
-    .t-cmd { color: var(--white); }
-    .t-out { padding-left: 20px; color: var(--text); }
-    .t-key { color: var(--muted); }
-    .t-val { color: var(--accent); }
-    .t-str { color: #ffcd6b; }
-    .t-ok  { color: var(--accent2); }
-    .blink {
-      display: inline-block; width: 7px; height: 13px;
-      background: var(--accent); vertical-align: text-bottom;
-      animation: blink 1s step-end infinite;
+    .photo-ring {
+      position: absolute; inset: -6px;
+      border-radius: 50%;
+      border: 1.5px solid var(--accent);
+      opacity: 0.35;
+      pointer-events: none;
     }
 
     /* Scroll hint */
@@ -244,11 +220,11 @@
     .skill-pct { font-size: 10px; color: var(--muted); width: 32px; text-align: right; }
 
     /* ── STARTUP ── */
-    #startup { background: linear-gradient(135deg, rgba(0,200,255,0.02) 0%, transparent 50%); }
+    #startup { background: linear-gradient(135deg, rgba(0,109,158,0.03) 0%, transparent 50%); }
     .startup-card {
       margin-top: 48px; max-width: 800px;
       border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
-      background: var(--bg2); box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+      background: var(--surface); box-shadow: 0 4px 24px rgba(0,0,0,0.04);
     }
     .sc-head {
       padding: 30px 36px; border-bottom: 1px solid var(--border);
@@ -256,7 +232,7 @@
     }
     .sc-icon {
       width: 54px; height: 54px; border-radius: 10px;
-      background: rgba(0,200,255,0.07); border: 1px solid rgba(0,200,255,0.2);
+      background: rgba(0,109,158,0.07); border: 1px solid rgba(0,109,158,0.2);
       display: flex; align-items: center; justify-content: center;
       font-size: 24px; flex-shrink: 0;
     }
@@ -267,7 +243,7 @@
     .sc-status {
       display: inline-flex; align-items: center; gap: 6px;
       font-size: 10px; color: var(--accent2); letter-spacing: 0.1em;
-      background: rgba(126,255,160,0.07); border: 1px solid rgba(126,255,160,0.18);
+      background: rgba(10,122,75,0.07); border: 1px solid rgba(10,122,75,0.18);
       padding: 3px 11px; border-radius: 20px; margin-top: 5px;
     }
     .sc-status::before {
@@ -297,7 +273,7 @@
     /* ── PROJECTS ── */
     .projects-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 48px; }
     .proj-card {
-      background: var(--bg2); border: 1px solid var(--border);
+      background: var(--surface); border: 1px solid var(--border);
       border-radius: 7px; padding: 28px 24px;
       transition: all 0.28s ease; position: relative; overflow: hidden;
     }
@@ -306,7 +282,7 @@
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
       opacity: 0; transition: opacity 0.3s;
     }
-    .proj-card:hover { border-color: rgba(0,200,255,0.25); transform: translateY(-5px); box-shadow: 0 20px 44px rgba(0,0,0,0.5); }
+    .proj-card:hover { border-color: rgba(0,109,158,0.2); transform: translateY(-5px); box-shadow: 0 20px 44px rgba(0,0,0,0.06); }
     .proj-card:hover::before { opacity: 1; }
     .proj-num { font-size: 10px; color: var(--muted); margin-bottom: 16px; letter-spacing: 0.1em; }
     .proj-name { font-family: 'Syne', sans-serif; font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
@@ -324,7 +300,7 @@
     .tl-item::before {
       content: ''; position: absolute; left: -36px; top: 6px;
       width: 10px; height: 10px; background: var(--accent); border-radius: 50%;
-      box-shadow: 0 0 14px var(--accent);
+      box-shadow: 0 0 14px rgba(0,109,158,0.3);
     }
     .tl-date { font-size: 10px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 5px; }
     .tl-role { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--white); }
@@ -348,7 +324,7 @@
       color: var(--text); text-decoration: none; border: 1px solid var(--border); border-radius: 4px;
       font-family: 'JetBrains Mono', monospace; transition: all 0.22s;
     }
-    .c-link:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,200,255,0.04); }
+    .c-link:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,109,158,0.04); }
 
     /* ── FOOTER ── */
     footer {
@@ -369,7 +345,8 @@
       nav, nav.scrolled { padding: 18px 24px; }
       .nav-links { gap: 20px; }
       .hero { grid-template-columns: 1fr; padding: 0 24px; min-height: auto; padding-top: 110px; padding-bottom: 60px; }
-      .hero-terminal { padding-top: 0; }
+      .hero-photo { padding-top: 0; }
+      .photo-frame { width: 260px; height: 260px; }
       section { padding: 72px 24px; }
       #about { grid-template-columns: 1fr; gap: 48px; }
       .projects-grid { grid-template-columns: 1fr; }
@@ -421,32 +398,11 @@
       </div>
     </div>
 
-    <!-- Terminal panel -->
-    <div class="hero-terminal">
-      <div class="terminal">
-        <div class="terminal-bar">
-          <div class="tdot r"></div>
-          <div class="tdot y"></div>
-          <div class="tdot g"></div>
-          <span class="t-title">sanath@vardio ~ $</span>
-        </div>
-        <div class="t-body">
-          <div class="t-row">
-            <span class="t-ps">$</span>
-            <span class="t-cmd">cat profile.json</span>
-          </div>
-          <div class="t-out">{</div>
-          <div class="t-out">&nbsp; <span class="t-key">"name"</span>:&nbsp;<span class="t-str">"Sanath Pedapudi"</span>,</div>
-          <div class="t-out">&nbsp; <span class="t-key">"role"</span>:&nbsp;<span class="t-str">"Founder @ Vardio"</span>,</div>
-          <div class="t-out">&nbsp; <span class="t-key">"type"</span>:&nbsp;<span class="t-str">"SaaS · Productivity"</span>,</div>
-          <div class="t-out">&nbsp; <span class="t-key">"stack"</span>:&nbsp;<span class="t-val">["React","Node","Python","SQL"]</span>,</div>
-          <div class="t-out">&nbsp; <span class="t-key">"status"</span>:&nbsp;<span class="t-ok">"building in public 🚀"</span></div>
-          <div class="t-out">}</div>
-          <div class="t-row" style="margin-top:8px">
-            <span class="t-ps">$</span>
-            <span class="t-cmd"><span class="blink"></span></span>
-          </div>
-        </div>
+    <!-- Photo panel -->
+    <div class="hero-photo">
+      <div class="photo-frame">
+        <img src="eruhuka.jpg" alt="Sanath Pedapudi" />
+        <div class="photo-ring"></div>
       </div>
     </div>
 
@@ -609,10 +565,10 @@
     <p class="contact-sub reveal">Internship offers, co-founder conversations, Vardio feedback, or just a good chat about building — always down.</p>
     <a href="mailto:sanath@vardio.co" class="email-link reveal">sanath@vardio.co</a>
     <div class="contact-row reveal">
-      <a href="https://linkedin.com/in/sanathpedapudi" class="c-link" target="_blank">◈ LinkedIn</a>
-      <a href="https://github.com/sanathpedapudi"      class="c-link" target="_blank">⌥ GitHub</a>
-      <a href="https://twitter.com/sanathpedapudi"     class="c-link" target="_blank">◉ Twitter / X</a>
-      <a href="#"                                       class="c-link">↓ Resume</a>
+      <a href="https://linkedin.com/in/sanath24" class="c-link" target="_blank">◈ LinkedIn</a>
+      <a href="https://github.com/sanathpedapudi24" class="c-link" target="_blank">⌥ GitHub</a>
+      <a href="https://twitter.com/sanathpedapudi" class="c-link" target="_blank">◉ Twitter / X</a>
+      <a href="#" class="c-link">↓ Resume</a>
     </div>
   </section>
 
