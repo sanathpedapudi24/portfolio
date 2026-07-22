@@ -1,0 +1,489 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
+@import "tailwindcss";
+
+
+/* ═══════════════════════════════════════════════════════════════
+   DEVELOPER IDENTITY — WARM EARTHY LIGHT THEME (Reference Match)
+   Inspired by Claude/Apple design language: clean, minimal, refined
+═══════════════════════════════════════════════════════════════ */
+:root[data-identity="developer"],
+:root {
+  color-scheme: light;
+  --bg-primary: #f5f0e8;
+  --bg-secondary: #efe9df;
+  --bg-card: rgba(255, 255, 255, 0.62);
+  --bg-card-hover: rgba(255, 255, 255, 0.78);
+  --border: rgba(255,255,255,0.36);
+  --border-accent: rgba(201,95,61,0.35);
+
+  /* Accent palette — warm terracotta (exact reference match) */
+  --accent-primary: #c95f3d;
+  --accent-cyan: #c95f3d;
+  --accent-blue: #8e5b35;
+  --accent-green: #8e5b35;
+  --accent-purple: #d98a55;
+
+  /* Text — exact reference match */
+  --text-primary: #251f1a;
+  --text-secondary: #6c5f55;
+  --text-muted: #9a8b7e;
+
+  /* Glow — warm soft shadows */
+  --glow-cyan: 0 22px 70px rgba(95,62,39,0.13), 0 8px 28px rgba(95,62,39,0.08);
+  --glow-green: 0 22px 70px rgba(95,62,39,0.13), 0 8px 28px rgba(95,62,39,0.08);
+  --glow-blue: 0 22px 70px rgba(95,62,39,0.13), 0 8px 28px rgba(95,62,39,0.08);
+
+  /* Glass — exact reference match */
+  --glass-bg: rgba(255, 255, 255, 0.58);
+  --glass-bg-strong: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.34);
+  --glass-blur: blur(20px) saturate(180%);
+  --glass-shadow:
+    0 22px 70px rgba(95,62,39,0.13),
+    0 8px 28px rgba(95,62,39,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.78),
+    inset 0 -1px 0 rgba(255,255,255,0.18);
+
+  /* Cursor */
+  --cursor-color: #c95f3d;
+  --cursor-ring: rgba(201,95,61,0.25);
+
+  /* Fonts — Apple-like clean sans-serif */
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-heading: 'Space Grotesk', -apple-system, sans-serif;
+
+  /* Transitions */
+  --transition-identity: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   VIDEO EDITOR IDENTITY — CINEMATIC DARK THEME
+═══════════════════════════════════════════════════════════════ */
+:root[data-identity="editor"] {
+  color-scheme: dark;
+  --bg-primary: #080808;
+  --bg-secondary: #111111;
+  --bg-card: #151515;
+  --bg-card-hover: #1a1a1a;
+  --border: rgba(255,255,255,0.08);
+  --border-accent: rgba(212,175,55,0.3);
+
+  --accent-primary: #d4af37;
+  --accent-cyan: #d4af37;
+  --accent-blue: #c9a227;
+  --accent-green: #f5e6a3;
+  --accent-purple: #8b7536;
+
+  --text-primary: #f5f5f0;
+  --text-secondary: #999;
+  --text-muted: #666;
+
+  --glow-cyan: 0 0 30px rgba(212,175,55,0.12), 0 0 60px rgba(212,175,55,0.06);
+  --glow-green: 0 0 30px rgba(245,230,163,0.12);
+  --glow-blue: 0 0 30px rgba(201,162,39,0.15);
+
+  --glass-bg: rgba(21,21,21,0.7);
+  --glass-bg-strong: rgba(26,26,26,0.8);
+  --glass-border: rgba(255,255,255,0.08);
+  --glass-blur: blur(20px) saturate(120%);
+  --glass-shadow: 0 0 0 1px rgba(212,175,55,0.05), 0 40px 80px rgba(0,0,0,0.8);
+
+  --cursor-color: #d4af37;
+  --cursor-ring: rgba(212,175,55,0.3);
+
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-heading: 'Cormorant Garamond', serif;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GLOBAL RESET & BASE
+═══════════════════════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  overflow-x: hidden;
+  line-height: 1.6;
+  cursor: none;
+  transition: background 0.6s ease, color 0.6s ease;
+}
+
+/* Warm background for developer */
+:root[data-identity="developer"] body::before,
+:root:not([data-identity="editor"]) body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 14% 8%, rgba(255, 248, 240, 0.44), transparent 22%),
+    linear-gradient(180deg, #faf7f2 0%, #f9f5ee 58%, #faf7f2 100%);
+  background-attachment: fixed;
+  pointer-events: none;
+}
+
+@media (hover: none) {
+  body { cursor: auto; }
+}
+
+::selection {
+  background: var(--accent-cyan);
+  color: #fff;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+a { color: inherit; }
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TYPOGRAPHY
+═══════════════════════════════════════════════════════════════ */
+.font-display { font-family: var(--font-display); }
+.font-heading { font-family: var(--font-heading); }
+.font-mono    { font-family: var(--font-mono); }
+
+.text-accent   { color: var(--accent-cyan); }
+.text-green    { color: var(--accent-green); }
+.text-muted    { color: var(--text-secondary); }
+
+/* ═══════════════════════════════════════════════════════════════
+   UTILITY CLASSES
+═══════════════════════════════════════════════════════════════ */
+.glow-cyan  { box-shadow: var(--glow-cyan); }
+.glow-green { box-shadow: var(--glow-green); }
+
+.border-accent { border-color: var(--border-accent); }
+
+/* Glass Card */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+}
+
+/* Premium Card — reference exact */
+.card {
+  background: linear-gradient(145deg, rgba(255,248,240,0.66), rgba(245,220,196,0.14) 52%, rgba(255,255,255,0.36)), var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow);
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.56);
+  box-shadow:
+    0 30px 80px rgba(95,62,39,0.11),
+    0 12px 34px rgba(95,62,39,0.07),
+    0 0 0 1px rgba(245,220,196,0.34),
+    inset 0 1px 0 rgba(255,255,255,0.86);
+}
+
+/* Section Label — reference eyebrow style */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: clamp(0.72rem, 0.68rem + 0.2vw, 0.82rem);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-weight: 900;
+}
+
+.section-label::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--accent-blue);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(201,95,61,0.3);
+  border-radius: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.05); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes grid-move {
+  from { transform: translateY(0); }
+  to   { transform: translateY(60px); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes scan-line {
+  0%   { top: -4px; }
+  100% { top: 100%; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes terminal-cursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10%       { transform: translate(-2%, -3%); }
+  20%       { transform: translate(1%, 2%); }
+  30%       { transform: translate(2%, -1%); }
+  40%       { transform: translate(-1%, 3%); }
+  50%       { transform: translate(-2%, 1%); }
+  60%       { transform: translate(1%, -2%); }
+  70%       { transform: translate(2%, 3%); }
+  80%       { transform: translate(-1%, -2%); }
+  90%       { transform: translate(1%, 2%); }
+}
+
+@keyframes progress-glass {
+  to { background-position: 220% 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   IDENTITY TRANSITION OVERLAY
+═══════════════════════════════════════════════════════════════ */
+.identity-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.identity-transition-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+  background: radial-gradient(ellipse at center, var(--accent-cyan) 0%, #000 70%);
+}
+
+/* Disable cyber grid for developer */
+.cyber-grid { background: transparent; }
+
+/* ═══════════════════════════════════════════════════════════════
+   FILM GRAIN OVERLAY (Editor)
+═══════════════════════════════════════════════════════════════ */
+.film-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  animation: grain 0.5s steps(1) infinite;
+  opacity: 0.6;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   COMMAND PALETTE
+═══════════════════════════════════════════════════════════════ */
+.command-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(37,31,26,0.4);
+  backdrop-filter: blur(8px);
+  z-index: 9000;
+}
+
+.command-palette {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(640px, 90vw);
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  overflow: hidden;
+  z-index: 9001;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LOADING SCREEN
+═══════════════════════════════════════════════════════════════ */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: #1a1410;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE HELPERS
+═══════════════════════════════════════════════════════════════ */
+.container-custom {
+  width: min(90%, 1200px);
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GRADIENT TEXT — reference exact
+═══════════════════════════════════════════════════════════════ */
+.gradient-text-dev {
+  background: linear-gradient(105deg, var(--text-primary) 0%, var(--text-primary) 42%, #a9663d 63%, var(--text-primary) 82%), var(--text-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-editor {
+  background: linear-gradient(135deg, #d4af37 0%, #f5e6a3 50%, #c9a227 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BUTTONS — reference exact
+═══════════════════════════════════════════════════════════════ */
+.btn-dev-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 18px;
+  background:
+    linear-gradient(135deg, rgba(232,154,108,0.16), transparent 48%),
+    var(--text-primary);
+  color: var(--bg-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 850;
+  border-radius: 16px;
+  border: none;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: none;
+}
+
+.btn-dev-primary:hover {
+  box-shadow:
+    0 16px 34px rgba(95,62,39,0.14),
+    0 0 0 1px rgba(245,220,196,0.32);
+  transform: translateY(-2px);
+}
+
+.btn-dev-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 18px;
+  background:
+    linear-gradient(135deg, rgba(255,248,240,0.72), rgba(245,220,196,0.22)),
+    var(--glass-bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: none;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow:
+    0 12px 34px rgba(95,62,39,0.1),
+    inset 0 1px 0 rgba(255,255,255,0.7);
+}
+
+.btn-dev-ghost:hover {
+  border-color: rgba(255,255,255,0.56);
+  transform: translateY(-2px);
+  box-shadow:
+    0 16px 40px rgba(95,62,39,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.8);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MATRIX EASTER EGG
+═══════════════════════════════════════════════════════════════ */
+.matrix-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 99990;
+  font-family: var(--font-mono);
+  color: #00ff41;
+  overflow: hidden;
+}
