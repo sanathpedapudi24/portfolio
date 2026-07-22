@@ -243,7 +243,7 @@ export default function DevProjectsSection() {
           gap: 16,
         }}>
           {filteredRepos.map((repo, i) => (
-            <ProjectCard key={repo.id} repo={repo} index={i} featured={i === 0} />
+            <ProjectCard key={repo.id || repo.name || i} repo={repo} index={i} featured={i === 0} />
           ))}
         </div>
 

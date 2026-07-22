@@ -124,7 +124,7 @@ export default function DevGitHubSection() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16 }}>
           {repos.map((repo, i) => (
             <motion.a
-              key={repo.id} href={repo.html_url} target="_blank" rel="noopener noreferrer"
+              key={repo.id || repo.name || i} href={repo.html_url} target="_blank" rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
               transition={{ duration: 0.5, delay: 0.2 + i * 0.08 }}
