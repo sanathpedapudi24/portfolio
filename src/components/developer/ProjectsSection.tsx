@@ -34,21 +34,20 @@ function getCategory(repo: GitHubRepo): string[] {
   const name = repo.name.toLowerCase();
 
   if (lang === 'python' || lang === 'jupyter notebook') cats.push('Python');
-  if (['html', 'css', 'javascript', 'typescript'].includes(lang) || name.includes('web')) cats.push('Web');
-  if (lang === 'css' && name.includes('dotfiles')) cats.push('Systems');
-  if (name.includes('dotfiles') || name.includes('config') || name.includes('linux')) cats.push('Systems');
+  if (['html', 'css', 'javascript', 'typescript'].includes(lang) || name.includes('web') || name.includes('portfolio') || name.includes('app')) cats.push('Web');
+  if (['shell', 'bash', 'batchfile', 'c', 'c++', 'rust', 'go'].includes(lang) || name.includes('dotfiles') || name.includes('config') || name.includes('linux')) cats.push('Systems');
 
   if (cats.length === 0) cats.push('Web'); // default fallback
   return cats;
 }
 
 const FALLBACK_REPOS: GitHubRepo[] = [
-  { id: 1, name: 'swingging', description: 'Recent Python project — fast-moving automation or experimentation space.', language: 'Python', html_url: 'https://github.com/sanathpedapudi24/swingging', updated_at: '2026-05-01', stargazers_count: 0, forks_count: 0, topics: [] },
-  { id: 2, name: 'AutoCert', description: 'A custom application for completing certifications, showing a practical automation instinct.', language: 'Python', html_url: 'https://github.com/sanathpedapudi24/AutoCert', updated_at: '2026-03-01', stargazers_count: 0, forks_count: 0, topics: [] },
-  { id: 3, name: 'carousel_tool', description: 'A Python utility for content, media, or UI automation workflows.', language: 'Python', html_url: 'https://github.com/sanathpedapudi24/carousel_tool', updated_at: '2026-05-01', stargazers_count: 0, forks_count: 0, topics: [] },
-  { id: 4, name: 'rlpingpong', description: 'Browser-based reinforcement learning and game experiment with interactive UI.', language: 'HTML', html_url: 'https://github.com/sanathpedapudi24/rlpingpong', updated_at: '2026-04-01', stargazers_count: 0, forks_count: 0, topics: [] },
-  { id: 5, name: 'web3', description: 'TypeScript project exploring Web3 concepts and modern JavaScript patterns.', language: 'TypeScript', html_url: 'https://github.com/sanathpedapudi24/web3', updated_at: '2026-03-01', stargazers_count: 0, forks_count: 0, topics: [] },
-  { id: 6, name: 'dotfiles', description: 'Arch Linux setup — environment ownership, Linux fluency, and developer ergonomics.', language: 'CSS', html_url: 'https://github.com/sanathpedapudi24/dotfiles', updated_at: '2026-03-01', stargazers_count: 0, forks_count: 0, topics: [] },
+  { id: 1275243928, name: 'ai_form_vault', description: 'Indian document OCR & management app - scan, classify, extract, and display Aadhaar/PAN/Voter ID as virtual digital cards', language: 'JavaScript', html_url: 'https://github.com/sanathpedapudi24/ai_form_vault', updated_at: '2026-07-18', stargazers_count: 0, forks_count: 0, topics: ['ocr', 'ai', 'document-management'] },
+  { id: 1301240246, name: 'Rag-Q-A-Assistant', description: 'RAG (Retrieval-Augmented Generation) Q&A assistant built with LLM embedding and vector search.', language: 'Python', html_url: 'https://github.com/sanathpedapudi24/Rag-Q-A-Assistant', updated_at: '2026-07-15', stargazers_count: 0, forks_count: 0, topics: ['rag', 'python', 'ai'] },
+  { id: 1185869863, name: 'dotfiles', description: 'my arch one to one copy — Arch Linux setup, window manager and terminal config.', language: 'CSS', html_url: 'https://github.com/sanathpedapudi24/dotfiles', updated_at: '2026-07-22', stargazers_count: 0, forks_count: 0, topics: ['archlinux', 'dotfiles'] },
+  { id: 1242055276, name: 'swingging', description: 'Automation and experimental algorithms workspace.', language: 'Python', html_url: 'https://github.com/sanathpedapudi24/swingging', updated_at: '2026-05-18', stargazers_count: 0, forks_count: 0, topics: ['python'] },
+  { id: 1226108302, name: 'carousel_tool', description: 'Media and content automation tool for generating carousel layouts.', language: 'Python', html_url: 'https://github.com/sanathpedapudi24/carousel_tool', updated_at: '2026-05-01', stargazers_count: 0, forks_count: 0, topics: ['python', 'automation'] },
+  { id: 1174996765, name: 'portfolio', description: 'Personal portfolio featuring dual developer & video editor identities built with Next.js 16 & Tailwind.', language: 'TypeScript', html_url: 'https://github.com/sanathpedapudi24/portfolio', updated_at: '2026-07-22', stargazers_count: 0, forks_count: 0, topics: ['nextjs', 'react', 'portfolio'] },
 ];
 
 const FILTERS = ['All', 'Python', 'Web', 'Systems'] as const;

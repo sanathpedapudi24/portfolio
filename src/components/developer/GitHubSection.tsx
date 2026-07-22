@@ -35,12 +35,12 @@ const LANG_COLORS: Record<string, string> = {
   'Jupyter Notebook': '#da5b0b', default: '#c95f3d',
 };
 
-const FALLBACK_STATS = { public_repos: 15, followers: 20, following: 30 };
+const FALLBACK_STATS = { public_repos: 12, followers: 5, following: 10 };
 const FALLBACK_REPOS: GitHubRepo[] = [
-  { id: 1, name: 'investment-planner', description: 'Full-stack investment management dashboard', stargazers_count: 3, forks_count: 1, language: 'TypeScript', html_url: 'https://github.com/sanathpedapudi24' },
-  { id: 2, name: 'playwright-automation', description: 'WhatsApp and web automation toolkit using Playwright', stargazers_count: 5, forks_count: 2, language: 'JavaScript', html_url: 'https://github.com/sanathpedapudi24' },
-  { id: 3, name: 'local-llm-lab', description: 'Local LLM experiments with Ollama and Unsloth', stargazers_count: 8, forks_count: 3, language: 'Python', html_url: 'https://github.com/sanathpedapudi24' },
-  { id: 4, name: 'portfolio', description: 'Dual-identity portfolio — Developer + Video Editor', stargazers_count: 12, forks_count: 4, language: 'TypeScript', html_url: 'https://github.com/sanathpedapudi24' },
+  { id: 1275243928, name: 'ai_form_vault', description: 'Indian document OCR & management app - scan, classify, extract, and display Aadhaar/PAN/Voter ID as virtual digital cards', stargazers_count: 0, forks_count: 0, language: 'JavaScript', html_url: 'https://github.com/sanathpedapudi24/ai_form_vault' },
+  { id: 1301240246, name: 'Rag-Q-A-Assistant', description: 'RAG (Retrieval-Augmented Generation) Q&A assistant built with LLM embedding and vector search.', stargazers_count: 0, forks_count: 0, language: 'Python', html_url: 'https://github.com/sanathpedapudi24/Rag-Q-A-Assistant' },
+  { id: 1185869863, name: 'dotfiles', description: 'my arch one to one copy — Arch Linux setup and terminal config.', stargazers_count: 0, forks_count: 0, language: 'CSS', html_url: 'https://github.com/sanathpedapudi24/dotfiles' },
+  { id: 1174996765, name: 'portfolio', description: 'Personal portfolio featuring dual developer & video editor identities built with Next.js 16.', stargazers_count: 0, forks_count: 0, language: 'TypeScript', html_url: 'https://github.com/sanathpedapudi24/portfolio' },
 ];
 
 export default function DevGitHubSection() {
